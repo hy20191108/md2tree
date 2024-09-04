@@ -18,18 +18,15 @@ class FileWatcher:
         self.changed_count = 0
 
     def watch(self):
-        with open(self.path) as f:
-            content = f.read()
+        content = self.path.read_text(encoding="utf-8")
 
         latest_hash = hashlib.md5(content.encode()).hexdigest()
 
         while True:
-            with open(self.path) as f:
-                hash = hashlib.md5(f.read().encode()).hexdigest()
+            content = self.path.read_text(encoding="utf-8")
+            hash = hashlib.md5(content.encode()).hexdigest()
 
-            if hash == latest_hash:
-                self.changed_count == 0
-            else:
+            if hash != latest_hash:
                 self.changed_count += 1
 
             if self.changed_count > 10:
