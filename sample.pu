@@ -1,0 +1,13 @@
+@startmindmap
+top to bottom direction
+
+* a
+** b
+*** c
+*** d
+*** e
+** f
+*** g
+*** h
+*** i
+@endmindmap
