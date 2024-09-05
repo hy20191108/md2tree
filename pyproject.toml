@@ -1,8 +1,11 @@
 [project]
 name = "md2tree"
 version = "0.1.0"
-description = "Add your description here"
-authors = [{ name = "hy20191108", email = "zwwp9976@gmail.com" }]
+description = "Convert markdown to tree structure"
+authors = [
+    { name = "hy20191108", email = "zwwp9976@gmail.com" },
+    { name = "take0x" },
+]
 dependencies = []
 readme = "README.md"
 requires-python = ">= 3.8"
