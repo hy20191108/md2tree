@@ -57,6 +57,7 @@ def convert(mdpath):
         print("convert to image")
         Pu2Jpg(pupath).convert()
         print("image generated")
+        pupath.unlink()
 
 
 class Md2Pu:
