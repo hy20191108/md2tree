@@ -83,7 +83,7 @@ class Pu2Jpg:
         command = [
             "java",
             "-jar",
-            "plantuml-1.2024.6.jar",
+            "plantuml.jar",
             self.pupath,
             "-charset",
             "UTF-8",
