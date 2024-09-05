@@ -55,7 +55,7 @@ def convert(mdpath: Path) -> None:
         print("pu generated")
 
         print("convert to image")
-        Pu2Jpg(pupath).convert()
+        Pu2Png(pupath).convert()
         print("image generated")
         pupath.unlink()
 
@@ -79,7 +79,7 @@ class Md2Pu:
         return line
 
 
-class Pu2Jpg:
+class Pu2Png:
     def __init__(self, pupath: Path) -> None:
         self.pupath = pupath
 
@@ -118,6 +118,6 @@ if __name__ == "__main__":
         sample_pu.write_text(pu, encoding="utf-8")
 
         print("pu generated")
-        print("convert to jpg")
-        Pu2Jpg(sample_pu).convert()
-        print("jpg generated")
+        print("convert to image")
+        Pu2Png(sample_pu).convert()
+        print("image generated")
