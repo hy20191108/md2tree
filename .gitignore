@@ -20,3 +20,6 @@ wheels/
 *.md
 !README.md
 !sample.md
+
+# IDE files
+.vscode/
