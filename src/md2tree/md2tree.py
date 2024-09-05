@@ -42,7 +42,11 @@ def convert(mdpath):
 
     while True:
         watcher = FileWatcher(mdpath)
-        watcher.watch()
+
+        try:
+            watcher.watch()
+        except KeyboardInterrupt:
+            break
 
         print("md changed")
         md = mdpath.read_text(encoding="utf-8")
