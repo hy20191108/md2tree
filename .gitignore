@@ -11,3 +11,15 @@ wheels/
 
 # java package files
 *.jar
+
+# output files
+*.png
+*.pu
+
+# markdown files
+*.md
+!README.md
+!sample.md
+
+# IDE files
+.vscode/
