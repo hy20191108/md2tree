@@ -13,38 +13,41 @@ FOOTER = """@endmindmap
 
 
 class FileWatcher:
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, latest_hash: str) -> None:
         self.path = path
         self.changed_count = 0
+        self.latest_hash = latest_hash
 
     def watch(self) -> None:
-        content = self.path.read_text(encoding="utf-8")
-
-        latest_hash = hashlib.md5(content.encode()).hexdigest()
-
         while True:
             content = self.path.read_text(encoding="utf-8")
             hash = hashlib.md5(content.encode()).hexdigest()
 
-            if hash != latest_hash:
+            if hash != self.latest_hash:
                 self.changed_count += 1
 
             if self.changed_count > 10:
                 print("file changed")
+                self.latest_hash = hash
                 break
 
             time.sleep(0.1)
+
+    def get_latest_hash(self) -> str:
+        return self.latest_hash
 
 
 def convert(mdpath: Path) -> None:
     mdpath = Path(mdpath)
     pupath = mdpath.with_suffix(".pu")
+    latest_hash = ''
 
     while True:
-        watcher = FileWatcher(mdpath)
-
+        watcher = FileWatcher(mdpath, latest_hash)
+        
         try:
             watcher.watch()
+            latest_hash = watcher.get_latest_hash()
         except KeyboardInterrupt:
             break
 
@@ -98,26 +101,4 @@ class Pu2Png:
 
 
 if __name__ == "__main__":
-    latest_hash = None
-
-    while True:
-        with open("sample.md") as f:
-            md = f.read()
-
-        hash = hashlib.md5(md.encode()).hexdigest()
-
-        if hash == latest_hash:
-            continue
-
-        print("md changed")
-
-        latest_hash = hash
-
-        pu = Md2Pu(md).convert()
-        sample_pu = Path("sample.pu")
-        sample_pu.write_text(pu, encoding="utf-8")
-
-        print("pu generated")
-        print("convert to image")
-        Pu2Png(sample_pu).convert()
-        print("image generated")
+    convert(Path("sample.md"))
