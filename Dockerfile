@@ -1,7 +1,8 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:22
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y curl
 RUN curl -LO https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
 
 ENV RYE_HOME="/opt/rye"
